@@ -166,18 +166,12 @@ public class LoginTests extends BaseTest {
         ajaxWait();
         assertTrue(isTextPresent("The password or username was incorrect."));
       }
-      CommonFunctions.removeAllBlockedIps();
-      
-      for(int i = 0; i < 5; i++) {
-        driver().findElement(By.id("loginSubmitButton")).click();
-        ajaxWait();
-        assertTrue(isTextPresent("The password or username was incorrect."));
-      }
 
       driver().findElement(By.id("loginSubmitButton")).click();
       ajaxWait();
       assertTrue(isTextPresent("Your IP-Address has been blocked for 30 seconds."));
       CommonFunctions.removeAllBlockedIps();
+      
     } catch(AssertionError e) {
       captureScreen("LoginTests.invalidLogin." + dataset.get("username"));
       throw e;
